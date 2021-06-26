@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import illustrationImg from '../../assets/illustration.svg';
 import logoImg from '../../assets/logo.svg';
@@ -6,8 +8,22 @@ import googleIconImg from '../../assets/google-icon.svg';
 import './styles.scss'
 
 import Button from '../../components/button/Index'
+import { auth, firebase } from '../../services/firebase';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 
 function Index() {
+  const history = useHistory();
+  const { user, signInWithGoogle } = useAuth();
+
+  async function handleCreateRoom() {
+    if(!user) {
+      await signInWithGoogle()
+    }
+
+    history.push('/rooms/new');
+  }
+
   return (
     <div id="page-auth">
       <aside>
@@ -21,7 +37,7 @@ function Index() {
         <div className="main-content">
           <img src={ logoImg } alt="Letmeask"/>
 
-          <button className="create-room">
+          <button onClick={ handleCreateRoom } className="create-room">
             <img src={ googleIconImg } alt="Logo do Google"/>
             Crie sua sala com o Google
           </button>
