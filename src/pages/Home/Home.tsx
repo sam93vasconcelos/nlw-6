@@ -11,6 +11,7 @@ import Button from '../../components/Button/Index'
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 import { database } from '../../services/firebase';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Home() {
   const history = useHistory();
@@ -35,13 +36,13 @@ function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if(!roomRef.exists()) {
-      alert('Room does not exists.');
+      toast.error('Room does not exists.');
 
       return;
     }
 
     if(roomRef.val().endedAt) {
-      alert('Room already closed');
+      toast.error('Room already closed');
 
       return;
     }
@@ -51,6 +52,7 @@ function Home() {
 
   return (
     <div id="page-auth">
+      <div><Toaster /></div>
       <aside>
         <img src={ illustrationImg } alt="Ilustração de perguntas e respostas"/>
         <strong>Crie salas de Q&amp;A ao vivo</strong>
