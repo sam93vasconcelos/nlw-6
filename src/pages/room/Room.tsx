@@ -10,22 +10,59 @@ import toast, { Toaster } from 'react-hot-toast';
 import { database } from '../../services/firebase';
 import { useEffect } from 'react';
 
+type FirebaseQuestions = Record<string, {
+  author: {
+    name: string;
+    avatar: string;
+  }
+  content: string;
+  isAnswered: boolean;
+  isHighLighted: boolean;
+}>
+
 type RoomParams = {
   id: string;
+}
+
+type Question = {
+  id: string;
+  author: {
+    name: string;
+    avatar: string;
+  }
+  content: string;
+  isAnswered: boolean;
+  isHighLighted: boolean;
 }
 
 function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [title, setTitle] = useState('');
   
   const roomId = params.id;
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
-    roomRef.once(`value`, room => {
-      console.log(room.val());
+    roomRef.on(`value`, room => {
+      const databaseRoom = room.val();
+      const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
+
+      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
+        return {
+          id: key,
+          content: value.content,
+          author: value.author,
+          isAnswered: value.isAnswered,
+          isHighLighted: value.isHighLighted,
+        }
+      })
+
+      setQuestions(parsedQuestions);
+      setTitle(databaseRoom.title);
     });
   }, [roomId]);
 
@@ -46,7 +83,7 @@ function Room() {
         name: user?.name,
         avatar: user?.avatar,
       },
-      isHightLighted: false,
+      isHighLighted: false,
       isAnswered: false
     }
 
@@ -67,8 +104,8 @@ function Room() {
 
       <main>
         <div className="room-title">
-          <h1>Sala React</h1>
-          <span>4 Perguntas</span>
+          <h1>{ title }</h1>
+          { questions.length > 0 && <span>{ questions.length } Pergunta{ questions.length > 1 && 's' }</span> }
         </div>
 
           <form onSubmit={handleSendQuestion}>
