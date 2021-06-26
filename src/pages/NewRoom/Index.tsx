@@ -7,7 +7,7 @@ import logoImg from '../../assets/logo.svg';
 
 import './styles.scss'
 
-import Button from '../../components/button/Index'
+import Button from '../../components/Button/Index'
 import { database } from '../../services/firebase';
 import { useAuth } from '../../hooks/useAuth';
 

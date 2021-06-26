@@ -7,7 +7,7 @@ import googleIconImg from '../../assets/google-icon.svg';
 
 import './styles.scss'
 
-import Button from '../../components/button/Index'
+import Button from '../../components/Button/Index'
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 import { database } from '../../services/firebase';
