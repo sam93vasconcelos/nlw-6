@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createContext, ReactNode } from "react";
 import { firebase, auth } from "../services/firebase";
 
-export const AuthContext = createContext({} as AuthContext);
+export const AuthContext = createContext({} as AuthContextType);
 
 type User = {
   id: string;
@@ -11,7 +11,7 @@ type User = {
   avatar: string;
 }
 
-type AuthContext = {
+type AuthContextType = {
   user: User | undefined;
   signInWithGoogle: () => Promise<void>;
 }
