@@ -55,8 +55,9 @@ function AdminRoom() {
     <div id="page-room">
       <div><Toaster /></div>
       <header>
+        <img onClick={() => history.push('/') } className="show-mobile pointer" src={ logoImg } alt="Letmeask"/>
         <div className="content">
-          <img src={ logoImg } alt="Letmeask"/>
+          <img onClick={() => history.push('/') } src={ logoImg } className="hide-mobile pointer" alt="Letmeask"/>
           <div>
             <RoomCode code={roomId} />
             <Button onClick={handleEndRoom} isOutlined>Encerrar Sala</Button>

@@ -15,9 +15,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
-  span {
+  span, span.show-mobile {
     display: block;
     align-self: center;
     flex: 1;
@@ -25,5 +26,28 @@
     width: 230px;
     font-size: 14px;
     font-weight: 500;
+  }
+
+  span.show-mobile {
+    display: none;
+  }
+}
+
+// Responsive #milhaextra
+
+@media (max-width: 768px) {
+  .room-code {
+    span {
+      display: none!important;
+      max-width: 180px;
+    }
+
+    div {
+      height: 100%;
+    }
+  }
+
+  span.show-mobile {
+    display: block!important;
   }
 }

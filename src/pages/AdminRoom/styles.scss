@@ -106,3 +106,45 @@
     }
   }
 }
+
+.show-mobile {
+  display: none;
+}
+
+// Responsive #milhaextra
+
+@media (max-width: 768px) {
+  header .content {
+    gap: 16px!important;
+
+    > img.hide-mobile {
+      display: none;
+    }
+
+    button {
+      max-width: 40%;
+    }
+  }
+  #page-room {
+    main {
+      max-width: 90%!important;
+    }
+  }
+
+  .room-title {
+
+    h1 {
+      font-size: 18px!important;
+      max-width: 65%;
+    }
+  }
+
+  .show-mobile {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+}

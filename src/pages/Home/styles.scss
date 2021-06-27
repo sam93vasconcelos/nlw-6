@@ -124,3 +124,12 @@
       margin-left: 16px;
   }
 }
+
+
+//Responsive #milhaextra
+
+@media (max-width: 768px) {
+  aside {
+    display: none!important;
+  }
+}

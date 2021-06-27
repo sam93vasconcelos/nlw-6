@@ -12,6 +12,7 @@
 
       > img {
         max-height: 45px;
+        cursor: pointer;
       }
     }
   }
@@ -94,6 +95,36 @@
           }
         }
       }
+    }
+  }
+}
+
+
+// Responsive #milhaextra
+
+@media (max-width: 768px) {
+  header .content {
+    gap: 16px!important;
+
+    > img {
+      height: 40px;
+    }
+  }
+  #page-room {
+    main {
+      max-width: 90%!important;
+    }
+  }
+
+  .form-footer {
+    margin-bottom: 16px;
+  }
+
+  .room-title {
+
+    h1 {
+      font-size: 18px!important;
+      max-width: 65%;
     }
   }
 }
